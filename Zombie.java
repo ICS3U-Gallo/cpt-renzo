@@ -1,4 +1,4 @@
-int x, y, y2, z, d, h2, n, u, p, b1, b2;
+int x, y, y2, b1, b2;
 PVector[] zombie;
 PVector[] zombiemovement;
 PVector[] player;
@@ -9,11 +9,6 @@ void setup() {
   size(800, 800);
   x = width/2;
   y = height/2;
-  d = height/2;
-  z = width/2;
-  n = 10;
-  u = 50;
-  p = 4;
   y2 = height/2;
   b1 = 0;
   b2 = 0;
@@ -62,16 +57,13 @@ void draw() {
 if (keyPressed) {
     if (key == CODED); {
     //move up
-    if (key == UP) y-= 3;
+    if (keyCode == UP) y-= 3;
     //move left
-    if (key == LEFT) x-= 3;
+    if (keyCode == LEFT) x-= 3;
     //move right
-    if (key == RIGHT) x+= 3;
+    if (keyCode == RIGHT) x+= 3;
     //move down
-    if (key == DOWN) y+= 3;
+    if (keyCode == DOWN) y+= 3;
     }
   }
 }
-void Contact()  {
-
-} 
