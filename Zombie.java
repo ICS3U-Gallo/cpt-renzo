@@ -1,24 +1,27 @@
+Zombie Z1;
 float x3, y3;
-color z;
-float zspeed;
 int x, y, x2, y2, b1, b2;
 PVector[] player;
-boolean shoot;
+PVector movement;
+PVector speed;
 void setup() {
   size(800, 800);
-  z = color(59, 245, 22);
   x3 = 500;
   y3 = 400;
-  zspeed = 1;
   x = 400;
   y = 400;
   x2 = width/2;
   y2 = height/2;
   b1 = 0;
   b2 = 0;
+  Z1 = new Zombie(color(59, 245, 22),0,400,1);
 }
 
 void draw() {
+  move();
+  
+  
+  
   background(232, 239, 37);
   //soldier character
   noStroke();
@@ -26,10 +29,10 @@ void draw() {
   rect(x, y, 10, 50);
   fill(#308B42);
   ellipse(x, y, 50, 50); 
-  if (x > 800); {
-    x = b1;
-  }
   //zombie
+  Z1.display();
+  Z1.speed();
+  
   // boundaries you can't cross 
   fill(#8E0808);
   //upper barrier
@@ -40,7 +43,11 @@ void draw() {
   rect(b1, 670, width, 50);
   //right barrier
   rect(750, b2, 80, height);
-if(keyPressed); {
+
+}
+
+void move() {
+  if(keyPressed) {
   if(key == CODED); {
     if (keyCode == UP) y-= 3;
     //move left
@@ -52,4 +59,26 @@ if(keyPressed); {
     }
   }
 }
-  
+class Zombie {
+color z;
+float xpos;
+float ypos;
+float zspeed;
+  Zombie(color tempZ, float tempXpos, float tempYpos, float tempZspeed) {
+  z = tempZ;
+  xpos = tempXpos;
+  ypos = tempYpos;
+  zspeed = tempZspeed;
+}
+void display() {
+  noStroke();
+  fill(z);
+  ellipse(xpos, ypos, 50, 50);
+  }
+void speed() {
+  xpos =  xpos + zspeed;
+  if (xpos > width) {
+    xpos = 0;
+    }
+  }
+}
