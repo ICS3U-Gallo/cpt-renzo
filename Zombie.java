@@ -1,6 +1,10 @@
-Zombie Z1;
+Zombie Z1, Z2, Z3;
 float x3, y3;
-int x, y, x2, y2, b1, b2;
+int x = 400;
+int y = 400; 
+int b1 = 0;
+int b2 = 0;
+int x2, y2, a;
 PVector[] player;
 PVector movement;
 PVector speed;
@@ -8,33 +12,33 @@ void setup() {
   size(800, 800);
   x3 = 500;
   y3 = 400;
-  x = 400;
-  y = 400;
+  a = 255;
   x2 = width/2;
   y2 = height/2;
-  b1 = 0;
-  b2 = 0;
   Z1 = new Zombie(color(59, 245, 22),0,400,1);
+  Z2 = new Zombie(color(255,0,0),0, 600, 3);
+  Z3 = new Zombie(color(59, 245, 22),400,0,1);
 }
-
 void draw() {
   move();
-  
-  
-  
+
   background(232, 239, 37);
   //soldier character
   noStroke();
   fill(0);
   rect(x, y, 10, 50);
-  fill(#308B42);
+  fill(48, 139, 66, a);
   ellipse(x, y, 50, 50); 
   //zombie
   Z1.display();
   Z1.speed();
+  Z2.display();
+  Z2.speed();
+  Z3.display();
+  Z3.speed2();
   
   // boundaries you can't cross 
-  fill(#8E0808);
+  fill(142, 8, 8);
   //upper barrier
   rect(b1, b2, width, height - 750);
   //left barrier
@@ -69,6 +73,10 @@ float zspeed;
   xpos = tempXpos;
   ypos = tempYpos;
   zspeed = tempZspeed;
+  
+  if(xpos >= x); {
+    Z1.remove();
+  }
 }
 void display() {
   noStroke();
@@ -80,5 +88,17 @@ void speed() {
   if (xpos > width) {
     xpos = 0;
     }
+    else if (xpos >= x){
+      
+    }
   }
+void speed2() {
+  ypos = ypos + zspeed;
+  if (ypos > height) {
+    ypos = 0;
+    }
+  }
+}
+class boundary  {
+
 }
