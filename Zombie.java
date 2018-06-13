@@ -1,18 +1,19 @@
+ArrayList<bullets> Bullets = new ArrayList<bullets>();
+ArrayList<Zombie> zombies = new ArrayList<Zombie>();
 Zombie Z1, Z2, Z3;
 float x3, y3;
-int x = 400;
-int y = 400; 
 int b1 = 0;
 int b2 = 0;
 int x2, y2, a;
 PVector[] player;
-PVector movement;
-PVector speed;
+PVector playermovement;
+PVector bulletspeed;
 void setup() {
   size(800, 800);
   x3 = 500;
   y3 = 400;
   a = 255;
+  playermovement = new PVector(width/2,height/2);
   x2 = width/2;
   y2 = height/2;
   Z1 = new Zombie(color(59, 245, 22),0,400,1);
@@ -20,24 +21,37 @@ void setup() {
   Z3 = new Zombie(color(59, 245, 22),400,0,1);
 }
 void draw() {
-  move();
-
+  move(); 
+  
   background(232, 239, 37);
   //soldier character
   noStroke();
-  fill(0);
-  rect(x, y, 10, 50);
   fill(48, 139, 66, a);
-  ellipse(x, y, 50, 50); 
+  ellipse(playermovement.x, playermovement.y, 50, 50); 
   //zombie
+  // collision 
+  if(playermovement.x >= width - 80) {
+   playermovement.x = width - 720;
+  }
+  else if (playermovement.x <= width - 720) {
+    playermovement.x = width - 80;
+  }
+  else if (playermovement.y >= height - 80) {
+    playermovement.y = height - 730;
+  }
+  else if (playermovement.y <= height - 730) {
+    playermovement.y = height - 90;
+  }
   Z1.display();
   Z1.speed();
   Z2.display();
   Z2.speed();
   Z3.display();
   Z3.speed2();
+
   
   // boundaries you can't cross 
+  
   fill(142, 8, 8);
   //upper barrier
   rect(b1, b2, width, height - 750);
@@ -49,20 +63,37 @@ void draw() {
   rect(750, b2, 80, height);
 
 }
-
+// bullet
+class bullets {
+color speed;
+float bulletx;
+float bullety;
+float bulletspeed;
+ bullets(color speed, float playermovement.x, float playermovement.y, float bulletspeed) {
+   speed = 0;
+   bulletx = playermovement.x;
+   bullety = playermovement.y;
+   bulletspeed = 3;
+ }
+}
+void display() {
+  
+}
 void move() {
+  // up,down,left, and right keys
   if(keyPressed) {
   if(key == CODED); {
-    if (keyCode == UP) y-= 3;
+    if (keyCode == UP) playermovement.y-= 3;
     //move left
-    if (keyCode == LEFT) x-= 3;
+    if (keyCode == LEFT) playermovement.x-= 3;
     //move right
-    if (keyCode == RIGHT) x+= 3;
+    if (keyCode == RIGHT) playermovement.x+= 3;
     //move down
-    if (keyCode == DOWN) y+= 3;
+    if (keyCode == DOWN) playermovement.y+= 3;
     }
   }
 }
+//zombie
 class Zombie {
 color z;
 float xpos;
@@ -74,8 +105,8 @@ float zspeed;
   ypos = tempYpos;
   zspeed = tempZspeed;
   
-  if(xpos >= x); {
-    Z1.remove();
+  if(xpos >= playermovement.x); {
+  
   }
 }
 void display() {
@@ -88,9 +119,6 @@ void speed() {
   if (xpos > width) {
     xpos = 0;
     }
-    else if (xpos >= x){
-      
-    }
   }
 void speed2() {
   ypos = ypos + zspeed;
@@ -98,7 +126,4 @@ void speed2() {
     ypos = 0;
     }
   }
-}
-class boundary  {
-
 }
